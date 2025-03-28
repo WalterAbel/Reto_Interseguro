@@ -1,12 +1,20 @@
-# Dockerfile - API QR
-FROM node:18-alpine
+# Usa una imagen base de Node.js
+FROM node:18
 
+# Crea y usa el directorio de la aplicación
 WORKDIR /app
 
-COPY package.json package-lock.json ./
-RUN npm install --omit=dev
+# Copia los archivos de configuración
+COPY package*.json ./
 
+# Instala dependencias
+RUN npm install
+
+# Copia el código fuente
 COPY . .
 
+# Expone el puerto 3000
 EXPOSE 3000
-CMD ["node", "dist/server.js"]
+
+# Comando para correr la API
+CMD ["npm", "run", "start"]

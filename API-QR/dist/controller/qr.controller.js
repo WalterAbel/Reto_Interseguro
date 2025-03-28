@@ -21,10 +21,11 @@ const procesarMatriz = (req, res) => __awaiter(void 0, void 0, void 0, function*
         if (!matriz || !Array.isArray(matriz)) {
             return res.status(400).json({ error: 'Formato invalido de matriz' });
         }
-        console.log('Procesando matriz', matriz);
+        console.log("Matriz recibida:", matriz);
         const qrResult = (0, qr_service_1.qrFactorizacion)(matriz);
-        // Enviar la matriz factorizada a la API de estadísticas
-        const statsResponse = yield axios_1.default.post('http://api-stats:3001/stats', { matriz: qrResult });
+        console.log("Factorización QR exitosa");
+        const statsResponse = yield axios_1.default.post('http://api-stats:3001/api/stats', { matriz: qrResult });
+        console.log("Respuesta de API de estadísticas:", statsResponse.data);
         res.json({ qrResult, stats: statsResponse.data });
     }
     catch (error) {
