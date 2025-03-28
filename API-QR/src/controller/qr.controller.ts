@@ -13,7 +13,7 @@ export const procesarMatriz = async (req: Request, res: Response) => {
         const qrResult = qrFactorizacion(matriz);
         console.log("Factorización QR exitosa");
 
-        const statsResponse = await axios.post('http://localhost:3001/api/stats', { matriz: qrResult });
+        const statsResponse = await axios.post('http://api-stats:3001/api/stats', { matriz: qrResult });
 
         console.log("Respuesta de API de estadísticas:", statsResponse.data);
         res.json({ qrResult, stats: statsResponse.data });

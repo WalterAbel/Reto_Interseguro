@@ -9,19 +9,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.processStats = void 0;
+exports.procesarCalculos = void 0;
 const stats_service_1 = require("../services/stats.service");
-const processStats = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const procesarCalculos = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { matriz } = req.body;
         if (!matriz || typeof matriz !== 'object') {
             return res.status(400).json({ error: 'Formato de matriz invalido' });
         }
+        console.log('Matriz recibida exitosamente');
         const stats = (0, stats_service_1.CalcularEstadisticas)(matriz);
+        console.log('Estadisticas calculadas exitosamente');
         res.json({ stats });
     }
     catch (error) {
         res.status(500).json({ error: 'Error al procesar las estadisticas' });
     }
 });
-exports.processStats = processStats;
+exports.procesarCalculos = procesarCalculos;
